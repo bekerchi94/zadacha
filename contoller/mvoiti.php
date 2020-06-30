@@ -16,6 +16,26 @@ $p[1]=$_SESSION['postdata']['adpass'];
 
 $k=$ct->user_get($p);
 $_SESSION['admin']=$k;
+
+if(isset($_SESSION['admin'])){
+echo <<<_ENDL
+<script>
+var st='<label class="control-label" id="adminl" style="color:#fff;">';
+_ENDL;
+echo 'st+="'.$_SESSION['admin'].'";';				
+echo <<<_ENDL
+st+="&nbsp;&nbsp;</label>";
+st+='<a href="./?vv&vyi=1" id="admina">';
+st+='<button class="btn btn-outline-danger my-2 my-sm-0" >Выйти</button></a>';
+document.getElementById('adminca').innerHTML=st;				
+	
+</script>
+_ENDL;
+
+
+
+}
+
 $_SESSION['postdata']=null;
 if($k)
 $aderr="";
@@ -28,6 +48,11 @@ else $aderr="Неверный имя пользователя или парол�
 if((isset($_SESSION['getdata']['vyi']))&&(strlen($_SESSION['getdata']['vyi'])>0))
 {
 	$_SESSION['admin']=null;
+	echo '<script>	
+		document.getElementById("adminl").remove();
+		document.getElementById("admina").remove();
+		</script>
+		';
 }
 
 if(isset($_SESSION['admin'])){
