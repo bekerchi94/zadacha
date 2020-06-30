@@ -284,7 +284,16 @@ function edid(id)
                 type: 'post',
                 success: function(data){
 					if(data){
+						str = '<input type="hidden" id="res" value="ok"/>';
+						k=data.search(str);
+						if(k>0){
 						alert("Сохранено!");
+						}else{
+							document.getElementById("adminl").remove();
+							document.getElementById("admina").remove();
+							alert("Произошла ошибка, войдите чтобы продолжить!");
+							location.href="./?vv";
+						}
 					}
                 }
      });		
