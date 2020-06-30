@@ -1,0 +1,10 @@
+#php_value display_errors Off
+php_flag magic_quotes 1
+php_flag magic_quotes_gpc 1
+php_value mbstring.http_input auto
+
+php_value upload_max_filesize 128M  
+php_value post_max_size 128M   
+php_value max_input_time 900   
+php_value max_execution_time 900 
+php_value session.cookie_domain .tester.kg
