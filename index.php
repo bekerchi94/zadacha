@@ -39,16 +39,17 @@ $_SESSION['getdata'] = $_GET;
 						</li>
 					</ul>
 				</div>
+				<div id="adminca">
 				<?php if(isset($_SESSION['admin'])){ ?>
 
-				<label class="control-label" style="color:#fff;">
+				<label class="control-label" id="adminl" style="color:#fff;">
 					<?php echo $_SESSION['admin']; ?>&nbsp;&nbsp;</label>
-				<a href="./?vv&vyi=1">
+				<a href="./?vv&vyi=1" id="admina">
 					<button class="btn btn-outline-danger my-2 my-sm-0" >Выйти</button>
 				</a>
 
 				<?php } ?>
-
+		</div>
 			</nav>
 			<div class="wrapper">
 				<?php
