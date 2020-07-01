@@ -1,5 +1,8 @@
 <?php
+if(empty($_SESSION))
+{
 session_start();   
+}
 $_SESSION['postdata'] = $_POST;
 $_SESSION['getdata'] = $_GET;
 ?>
@@ -15,7 +18,15 @@ $_SESSION['getdata'] = $_GET;
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
 			<script src="./scripts/bootstrap.min.js" type="text/javascript"></script>
 			<script src="./scripts/bootstrapValidator.min.js" type="text/javascript"></script>
-
+			
+			<?php if(isset($_SESSION['admin'])){ ?>
+				<script src="./scripts/script2.js" type="text/javascript"></script>	
+				<title>админ панел</title>
+			<?php }else { ?> 
+			<script src="./scripts/scripts.js" type="text/javascript"></script>	
+			<title>задачи</title>
+			<?php } ?>
+			
 		</head>
 		<body>
 
@@ -28,14 +39,14 @@ $_SESSION['getdata'] = $_GET;
 				<div class="collapse navbar-collapse" id="navbarColor01">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item active">
-							<a class="nav-link" href="./?sp">Список задач<span class="sr-only">(current)</span>
-							</a>
+						<?php if(!isset($_SESSION['admin'])){ ?>
+							<a class="nav-link" href="./?sp">Список задач<span class="sr-only">(current)</span></a>
+						<?php }?>
 						</li>
 						<li class="nav-item">
+						<?php if(!isset($_SESSION['admin'])){ ?>
 							<a class="nav-link" href="./?db">Добавить задачу</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="./?vv">админка</a>
+						<?php } ?>
 						</li>
 					</ul>
 				</div>
@@ -48,25 +59,30 @@ $_SESSION['getdata'] = $_GET;
 					<button class="btn btn-outline-danger my-2 my-sm-0" >Выйти</button>
 				</a>
 
+				<?php }else { ?>
+				<a class="nav-link" href="./?vv"><button class="btn btn-info">войти</button></a>	
 				<?php } ?>
 		</div>
 			</nav>
 			<div class="wrapper">
-				<?php
+	<?php
 		if(isset($_GET['sp']))
 		{
-		include('./view/vspisok_zadach.php');   
+		include('./contoller/mspisok_zadach.php');   
 		}else
 		if(isset($_GET['db']))
 		{
-		include('./view/vdobavit.php');   
+		include('./contoller/mdobavit.php');   
 		}else
 		if(isset($_GET['vv']))
 		{
-		include('./view/vvoiti.php');   
-		}else
-		include('./view/vspisok_zadach.php');
-
+		include('./contoller/mvoiti.php');   
+		}
+		else
+		if(empty($_GET))
+		{
+			include('./contoller/mspisok_zadach.php');
+		}
 	?>
 			</div>
 
