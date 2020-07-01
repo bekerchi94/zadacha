@@ -68,7 +68,8 @@ class bazovyi{
 		 {
 			 $qy='SELECT COUNT(`name`) FROM `zadacha`';
 			 $result=$this->$con->query($qy);
-			if ($result) {
+			if ($result) 
+			{
 				$row =$result->fetch(PDO::FETCH_NUM);
 			}
 			return $row[0];
@@ -89,7 +90,8 @@ class bazovyi{
 			$qy='SELECT `name` from `user` WHERE (`name`=?)AND(`pass`=?)';
 			$res=$this->$con->prepare($qy);
 			$result=$res->execute($rid);
-			if ($result) {
+			if ($result) 
+			{
 				$row =$res->fetch(PDO::FETCH_NUM);
 			}
 			return $row[0];	
@@ -104,12 +106,16 @@ class bazovyi{
 			$qy='SELECT `status` from `zadacha` WHERE `id`=?';
 			$res=$this->$con->prepare($qy);
 			$result=$res->execute($kt);
-			if ($result) {
+			
+			if ($result)
+			{
 				$row =$res->fetch(PDO::FETCH_NUM);
 			}
+			
 			$k=$row[0];
-			if($k==1) $k=0;
-			else $k=1;
+			
+			if($k==1) $k=0; else $k=1;
+			
 			$qy="UPDATE `zadacha` SET  `status`=$k WHERE `id`=?";
 			$res=$this->$con->prepare($qy);
 			$res->execute($kt);
